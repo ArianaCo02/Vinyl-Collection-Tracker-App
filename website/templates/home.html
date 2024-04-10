@@ -14,7 +14,7 @@
       </form>
     </div>
   </div>
-  
+
     <div class="vinyls">
       {% if discogs_data %}
         {% for vinyl in discogs_data %}
@@ -30,6 +30,8 @@
       {% endif %}
     </div>
 
+    <button id="loadMoreButton" class="more-button">Load More</button>
+
   {% else %}
     <p>You are not logged in.</p>
   {% endif %}
@@ -44,6 +46,7 @@
       xhr.open('POST', '/search', true);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr.send('search_term=' + encodeURIComponent(searchTerm)); // send request
+      xhr.open('GET', '/load_more_vinyls', true);
 
       // handle repsonse
       xhr.onreadystatechange = function(){
